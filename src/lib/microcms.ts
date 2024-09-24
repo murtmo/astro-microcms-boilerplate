@@ -1,5 +1,4 @@
 //SDK利用準備
-import type { MicroCMSQueries } from "microcms-js-sdk";
 import { createClient } from "microcms-js-sdk";
 
 const client = createClient({
@@ -8,33 +7,31 @@ const client = createClient({
 });
 
 //型定義
-export type Blog = {
+export type Content = {
   id: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  revisedAt: string;
   title: string;
   content: string;
+  type: ("blog" | "news")[];
 };
-export type BlogResponse = {
+export type ContentResponse = {
   totalCount: number;
   offset: number;
   limit: number;
-  contents: Blog[];
+  contents: Content[];
 };
 
 //APIの呼び出し
-export const getBlogs = async (queries?: MicroCMSQueries) => {
-  return await client.get<BlogResponse>({ endpoint: "blogs", queries });
-};
-export const getBlogDetail = async (
-  contentId: string,
-  queries?: MicroCMSQueries,
-) => {
-  return await client.getListDetail<Blog>({
+export async function getContents(type: "blog" | "news") {
+  const response = await client.get<ContentResponse>({
     endpoint: "blogs",
-    contentId,
-    queries,
+    queries: { filters: `type[contains]${type}` },
   });
-};
+  return response.contents;
+}
+export async function getContentByID(type: "blog" | "news", id: string) {
+  const response = await client.getList<Content>({
+    endpoint: "blogs",
+    queries: { filters: `type[contains]${type}[and]id[equals]${id}` },
+  });
+  return response.contents[0];
+}

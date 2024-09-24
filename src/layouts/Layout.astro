@@ -21,10 +21,15 @@ const { title } = Astro.props;
   </body>
 </html>
 
-<style lang="scss">
+<style lang="scss" is:global>
   main {
     margin: auto;
     padding: 1em;
     max-width: 60ch;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 </style>

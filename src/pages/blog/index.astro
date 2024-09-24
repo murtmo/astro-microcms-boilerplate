@@ -2,17 +2,18 @@
 import Layout from "@layouts/Layout.astro";
 
 //microCMS呼び出し
-import { getBlogs } from "@lib/microcms";
-const response = await getBlogs({ fields: ["id", "title"] });
+import { getContents } from "@lib/microcms";
+const response = await getContents("blog");
 ---
 
 <Layout title="My first blog with Astro">
   <main>
+    <h2>ブログ記事</h2>
     <ul>
       {
-        response.contents.map((content: any) => (
+        response.map((post) => (
           <li>
-            <a href={`/blogs/${content.id}`}>{content.title}</a>
+            <a href={`/blog/${post.id}`}>{post.title}</a>
           </li>
         ))
       }
