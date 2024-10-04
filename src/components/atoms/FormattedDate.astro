@@ -1,4 +1,6 @@
 ---
+import { formatDate } from "@lib/util";
+
 interface Props {
   date?: string; // ISO 8601 形式の日付文字列
 }
@@ -7,22 +9,7 @@ const { date } = Astro.props;
 
 // date が undefined の場合のデフォルト値を設定
 const dateObj = date ? new Date(date) : new Date();
-
-const formatter = new Intl.DateTimeFormat("ja-JP", {
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-});
-
-const formattedDate = formatter
-  .format(dateObj)
-  .split("/")
-  .map((part, index) => {
-    if (index === 0) return `${part}年`;
-    if (index === 1) return `${part}月`;
-    return `${part}日`;
-  })
-  .join("");
+const formattedDate = formatDate(dateObj);
 ---
 
 <time datetime={date}>{formattedDate}</time>
