@@ -2,7 +2,7 @@
 import { getContents } from "@lib/microcms";
 
 import Layout from "@layouts/Layout.astro";
-import ArticleTemplate from "@components/templates/ArticleTemplate.astro";
+import ArticleDetailTemplate from "@components/templates/ArticleDetailTemplate.astro";
 
 // 詳細記事ページの全パスを取得
 export async function getStaticPaths() {
@@ -16,5 +16,5 @@ export async function getStaticPaths() {
 ---
 
 <Layout title="My first blog with Astro">
-  <ArticleTemplate type="blog" />
+  <ArticleDetailTemplate type="blog" />
 </Layout>
