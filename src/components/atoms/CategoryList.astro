@@ -1,13 +1,20 @@
 ---
-import type { CategoryData } from "src/type";
+import type { ContentType, CategoryData } from "src/type";
 
 interface Props {
+  type: ContentType["type"];
   categories: CategoryData[];
 }
 
-const { categories } = Astro.props;
+const { type, categories } = Astro.props;
 ---
 
 <div>
-  {categories.map((category) => <span>{category.name} </span>)}
+  {
+    categories.map((category) => (
+      <span>
+        <a href={`/${type}/category/${category.id}`}>{category.name} </a>
+      </span>
+    ))
+  }
 </div>
