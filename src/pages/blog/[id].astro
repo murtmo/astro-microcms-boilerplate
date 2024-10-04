@@ -18,9 +18,7 @@ const post = await getContentByID("blog", id as string);
 ---
 
 <Layout title="My first blog with Astro">
-  <main>
-    <h1>{post.title}</h1>
-    <p>公開日時：{post.publishedAt}</p>
-    <div set:html={post.content} />
-  </main>
+  <h1>{post.title}</h1>
+  <p>公開日時：{post.publishedAt}</p>
+  <div set:html={post.content} />
 </Layout>

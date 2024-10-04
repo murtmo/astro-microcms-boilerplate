@@ -11,8 +11,6 @@ const response = await getContents(type);
 ---
 
 <Layout title="My first blog with Astro">
-  <main>
-    <h2>ニュース記事一覧</h2>
-    <PostList posts={response} type={type} />
-  </main>
+  <h2>ニュース記事一覧</h2>
+  <PostList posts={response} type={type} />
 </Layout>
