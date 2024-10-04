@@ -1,0 +1,21 @@
+---
+import type { ContentType, NewsPost } from "src/type.ts";
+import { getContentByID } from "@lib/microcms";
+
+import Article from "@components/blocks/Article.astro";
+
+interface Props {
+  type: ContentType["type"];
+}
+
+const { type } = Astro.props;
+
+//記事の詳細情報を取得
+const { id } = Astro.params;
+const post = await getContentByID(type, id as string);
+---
+
+<div>
+  <!-- 型安全性のため、postの型を明示的に定義しておく -->
+  <Article type={type} article={post as NewsPost} />
+</div>
