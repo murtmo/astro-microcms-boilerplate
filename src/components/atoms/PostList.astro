@@ -1,18 +1,26 @@
 ---
-import type { ContentType, PostListData } from "src/type";
+import type { ContentType, PostListData, ResponceLimit } from "src/type";
+
+import FormattedDate from "@components/atoms/FormattedDate.astro";
 
 interface Props {
   type: ContentType["type"];
   posts: PostListData[];
+  limit?: ResponceLimit;
 }
 
-const { type, posts } = Astro.props;
+const { type, posts, limit } = Astro.props;
+
+// limit が指定されている場合はその数だけ posts を表示し、
+// 指定されていない場合は全ての posts を表示する
+const displayPosts = limit ? posts.slice(0, limit) : posts;
 ---
 
-<ul>
+<ul class="postList">
   {
-    posts.map((post) => (
+    displayPosts.map((post) => (
       <li>
+        <FormattedDate date={post.publishedAt} />
         <a href={`/${type}/${post.id}`}>{post.title}</a>
       </li>
     ))

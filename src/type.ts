@@ -7,9 +7,12 @@ export type CategoryData = {
   name: string;
 };
 
+export type ResponceLimit = number;
+
 export type Content = {
   id: string;
   title: string;
+  publishedAt: string;
   categories: CategoryData[];
   content: string;
   type: ContentType["type"];
@@ -18,13 +21,14 @@ export type Content = {
 export type ContentResponse = {
   totalCount: number;
   offset: number;
-  limit: number;
+  limit: ResponceLimit;
   contents: Content[];
 };
 
 export interface PostListData {
   id: string;
   title: string;
+  publishedAt: string;
 }
 
 export interface PostData {

@@ -1,11 +1,25 @@
 ---
+import { getContents } from "@lib/microcms";
+
 import Layout from "@layouts/Layout.astro";
+import PostList from "@components/atoms/PostList.astro";
+
+const MAX_POSTS_NUM = 1;
+
+const newsPosts = await getContents("news");
+const blogPosts = await getContents("blog");
 ---
 
 <Layout title="Welcome to Astro.">
   <h1>Sample Web Site <br />with Astro + microCMS</h1>
-  <ul>
-    <li><a href="/blog">ブログ</a></li>
-    <li><a href="/news">ニュース</a></li>
-  </ul>
+  <section>
+    <h2>ニュース</h2>
+    <PostList type="news" posts={newsPosts} limit={MAX_POSTS_NUM} />
+    {newsPosts.length > MAX_POSTS_NUM && <a href="/news">もっと見る</a>}
+  </section>
+  <section>
+    <h2>ブログ</h2>
+    <PostList type="blog" posts={blogPosts} limit={MAX_POSTS_NUM} />
+    {blogPosts.length > MAX_POSTS_NUM && <a href="/blog">もっと見る</a>}
+  </section>
 </Layout>

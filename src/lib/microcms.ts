@@ -15,6 +15,16 @@ export async function getContents(type: ContentType["type"]) {
   });
   return response.contents;
 }
+// export async function getContentsMaximum(
+//   type: ContentType["type"],
+//   limit: number,
+// ) {
+//   const response = await client.get<ContentResponse>({
+//     endpoint: "blogs",
+//     queries: { filters: `type[contains]${type}`, limit: limit },
+//   });
+//   return response.contents;
+// }
 export async function getContentByID(type: ContentType["type"], id: string) {
   const response = await client.getList<Content>({
     endpoint: "blogs",
