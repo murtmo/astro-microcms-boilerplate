@@ -1,16 +1,8 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import PostList from "@components/parts/PostList.astro";
-
-//microCMS呼び出し
-import { getContents } from "@lib/microcms";
-
-//data
-const type = "news";
-const response = await getContents(type);
+import ArticleListTemplate from "@components/templates/ArticleListTemplate.astro";
 ---
 
 <Layout title="My first blog with Astro">
-  <h2>ニュース記事一覧</h2>
-  <PostList posts={response} type={type} />
+  <ArticleListTemplate type="news" />
 </Layout>

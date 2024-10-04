@@ -1,0 +1,21 @@
+---
+import type { ContentType } from "src/type.ts";
+import { getContents } from "@lib/microcms";
+
+import PostList from "@components/parts/PostList.astro";
+
+interface Props {
+  type: ContentType["type"];
+}
+
+const { type } = Astro.props;
+
+//data
+const title = type === "blog" ? "ブログ" : "ニュース";
+const postResponse = await getContents(type);
+---
+
+<div>
+  <h2>{title}記事一覧</h2>
+  <PostList type={type} posts={postResponse} />
+</div>
