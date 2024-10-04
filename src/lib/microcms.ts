@@ -11,7 +11,7 @@ const client = createClient({
 export async function getContents(type: ContentType["type"]) {
   const response = await client.get<ContentResponse>({
     endpoint: "blogs",
-    queries: { filters: `type[contains]${type}` },
+    queries: { filters: `type[contains]${type}`, orders: "-publishedAt" },
   });
   return response.contents;
 }
