@@ -1,5 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import FormattedDate from "@components/parts/FormattedDate.astro";
+
 import { getContents, getContentByID } from "@lib/microcms";
 
 // 詳細記事ページの全パスを取得
@@ -20,7 +22,9 @@ const post = await getContentByID("news", id as string);
 <Layout title="My first blog with Astro">
   <main>
     <h1>{post.title}</h1>
-    <p>公開日時：{post.publishedAt}</p>
+    <p>
+      公開日時：<FormattedDate date={post.publishedAt} />
+    </p>
     <div set:html={post.content} />
   </main>
 </Layout>
