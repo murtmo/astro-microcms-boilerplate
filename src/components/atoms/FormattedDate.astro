@@ -1,5 +1,5 @@
 ---
-import { formatDate } from "@lib/util";
+import { formatDateJa } from "@util/formatDate";
 
 interface Props {
   date?: string; // ISO 8601 形式の日付文字列
@@ -9,7 +9,7 @@ const { date } = Astro.props;
 
 // date が undefined の場合のデフォルト値を設定
 const dateObj = date ? new Date(date) : new Date();
-const formattedDate = formatDate(dateObj);
+const formattedDate = formatDateJa(dateObj);
 ---
 
 <time datetime={date}>{formattedDate}</time>

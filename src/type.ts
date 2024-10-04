@@ -37,3 +37,7 @@ export interface PostData {
   publishedAt: string;
   content: string;
 }
+
+export interface GroupedByDateContents {
+  [date: string]: PostListData[];
+}

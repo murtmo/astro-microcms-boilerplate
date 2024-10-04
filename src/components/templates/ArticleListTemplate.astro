@@ -1,6 +1,7 @@
 ---
 import type { ContentType } from "src/type.ts";
 import { getContents } from "@lib/microcms";
+import { groupByYearMonth } from "@util/groupBy";
 
 import PostList from "@components/atoms/PostList.astro";
 
@@ -13,10 +14,34 @@ const { type } = Astro.props;
 //data
 const title = type === "blog" ? "ブログ" : "ニュース";
 const postResponse = await getContents(type);
+const monthlyPostList = groupByYearMonth(postResponse);
 ---
 
 <div>
   <h2>{title}記事一覧</h2>
-  <PostList type={type} posts={postResponse} />
+  <section>
+    <PostList type={type} posts={postResponse} />
+  </section>
+  <section>
+    <h3>カテゴリ別アーカイブ</h3>
+    <ul>
+      <li>TBD</li>
+    </ul>
+  </section>
+  <section>
+    <h3>月別アーカイブ</h3>
+    <ul>
+      {
+        Object.keys(monthlyPostList).map((index) => (
+          <li>
+            <a href={`${type}/archive/${index}`}>
+              {index.split("_")[0] + "年" + index.split("_")[1] + "月"}
+            </a>
+            （{monthlyPostList[index].length}）
+          </li>
+        ))
+      }
+    </ul>
+  </section>
   <a href={`/`}>トップへ戻る</a>
 </div>

@@ -1,0 +1,30 @@
+---
+import type { GroupedByDateContents } from "src/type";
+import { getContents } from "@lib/microcms";
+import { groupByYearMonth } from "@util/groupBy";
+
+import Layout from "@layouts/Layout.astro";
+import PostList from "@components/atoms/PostList.astro";
+
+export async function getStaticPaths() {
+  const data = await getContents("news");
+  const monthlyIndex = groupByYearMonth(data) as GroupedByDateContents;
+
+  return Object.keys(monthlyIndex).map((date) => ({
+    params: { date },
+    props: { monthlyPosts: monthlyIndex[date] },
+  }));
+}
+
+const { date } = Astro.params;
+const { monthlyPosts } = Astro.props;
+
+// data
+const [year, month] = (date as string).split("_");
+const title = `${year}年${month}月の記事一覧`;
+---
+
+<Layout title="My first blog with Astro">
+  <h2>{title}</h2>
+  <PostList type="news" posts={monthlyPosts} />
+</Layout>
