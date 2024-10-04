@@ -1,0 +1,13 @@
+---
+import type { CategoryData } from "src/type";
+
+interface Props {
+  categories: CategoryData[];
+}
+
+const { categories } = Astro.props;
+---
+
+<div>
+  {categories.map((category) => <span>{category.name} </span>)}
+</div>

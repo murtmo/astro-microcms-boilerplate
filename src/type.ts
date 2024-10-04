@@ -2,12 +2,19 @@ export type ContentType = {
   type: "blog" | "news";
 };
 
+export type CategoryData = {
+  id: string;
+  name: string;
+};
+
 export type Content = {
   id: string;
   title: string;
+  categories: CategoryData[];
   content: string;
   type: ContentType["type"];
 };
+
 export type ContentResponse = {
   totalCount: number;
   offset: number;
@@ -22,6 +29,7 @@ export interface PostListData {
 
 export interface PostData {
   title: string;
+  categories: CategoryData[];
   publishedAt: string;
   content: string;
 }

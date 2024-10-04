@@ -2,6 +2,7 @@
 import type { ContentType, PostData } from "src/type";
 
 import FormattedDate from "@components/atoms/FormattedDate.astro";
+import CategoryList from "@components/atoms/CategoryList.astro";
 
 interface Props {
   type: ContentType["type"];
@@ -14,8 +15,10 @@ const { type, article } = Astro.props;
 <article class="article">
   <h1>{article.title}</h1>
   <p>
-    公開日時：<FormattedDate date={article.publishedAt} />
+    公開日時：
+    <FormattedDate date={article.publishedAt} />
   </p>
+  <CategoryList categories={article.categories} />
   <div set:html={article.content} />
   <a href={`/${type}`}>一覧へ戻る</a>
 </article>
