@@ -6,7 +6,7 @@ export type Content = {
   id: string;
   title: string;
   content: string;
-  type: ("blog" | "news")[];
+  type: ContentType["type"];
 };
 export type ContentResponse = {
   totalCount: number;
@@ -15,7 +15,12 @@ export type ContentResponse = {
   contents: Content[];
 };
 
-export interface NewsPost {
+export interface PostListData {
+  id: string;
+  title: string;
+}
+
+export interface PostData {
   title: string;
   publishedAt: string;
   content: string;

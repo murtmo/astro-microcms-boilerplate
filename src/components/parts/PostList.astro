@@ -1,12 +1,9 @@
 ---
-export interface BlogPost {
-  id: string;
-  title: string;
-}
+import type { ContentType, PostListData } from "src/type";
 
 interface Props {
-  type: String;
-  posts: BlogPost[];
+  type: ContentType["type"];
+  posts: PostListData[];
 }
 
 const { type, posts } = Astro.props;
