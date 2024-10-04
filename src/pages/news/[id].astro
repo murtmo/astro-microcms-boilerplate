@@ -1,8 +1,9 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import FormattedDate from "@components/parts/FormattedDate.astro";
-
+import { type NewsPost } from "@types/type";
 import { getContents, getContentByID } from "@lib/microcms";
+
+import Layout from "@layouts/Layout.astro";
+import Article from "@components/parts/Article.astro";
 
 // 詳細記事ページの全パスを取得
 export async function getStaticPaths() {
@@ -20,11 +21,6 @@ const post = await getContentByID("news", id as string);
 ---
 
 <Layout title="My first blog with Astro">
-  <main>
-    <h1>{post.title}</h1>
-    <p>
-      公開日時：<FormattedDate date={post.publishedAt} />
-    </p>
-    <div set:html={post.content} />
-  </main>
+  <!-- 型安全性のため、postの型を明示的に定義しておく -->
+  <Article type="news" article={post as NewsPost} />
 </Layout>

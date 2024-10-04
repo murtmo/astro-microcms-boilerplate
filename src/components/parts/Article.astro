@@ -1,0 +1,25 @@
+---
+import FormattedDate from "@components/parts/FormattedDate.astro";
+
+export interface ArticleProps {
+  title: string;
+  publishedAt: string;
+  content: string;
+}
+
+interface Props {
+  type: string;
+  article: ArticleProps;
+}
+
+const { type, article } = Astro.props;
+---
+
+<article class="article">
+  <h1>{article.title}</h1>
+  <p>
+    公開日時：<FormattedDate date={article.publishedAt} />
+  </p>
+  <div set:html={article.content} />
+  <a href={`/${type}`}>一覧へ戻る</a>
+</article>
