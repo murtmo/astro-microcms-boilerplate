@@ -20,5 +20,4 @@ const { type, article } = Astro.props;
   </p>
   <CategoryList categories={article.categories} />
   <div set:html={article.content} />
-  <a href={`/${type}`}>一覧へ戻る</a>
 </article>

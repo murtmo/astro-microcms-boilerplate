@@ -18,4 +18,5 @@ const post = await getContentByID(type, id as string);
 <div>
   <!-- 型安全性のため、postの型を明示的に定義しておく -->
   <Article type={type} article={post as PostData} />
+  <a href={`/${type}`}>一覧へ戻る</a>
 </div>

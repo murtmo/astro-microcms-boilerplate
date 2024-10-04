@@ -1,0 +1,23 @@
+---
+import type { ContentType, PostListData } from "src/type";
+
+import PostList from "@components/atoms/PostList.astro";
+
+interface Props {
+  type: ContentType["type"];
+  date: string;
+  posts: PostListData[];
+}
+
+const { type, date, posts } = Astro.props;
+
+// data
+const [year, month] = (date as string).split("_");
+const title = `${year}年${month}月の記事一覧`;
+---
+
+<div>
+  <h2>{title}</h2>
+  <PostList type={type} posts={posts} />
+  <a href={`/${type}`}>一覧へ戻る</a>
+</div>
