@@ -1,0 +1,23 @@
+---
+export interface BlogPost {
+  id: string;
+  title: string;
+}
+
+interface Props {
+  type: String;
+  posts: BlogPost[];
+}
+
+const { type, posts } = Astro.props;
+---
+
+<ul>
+  {
+    posts.map((post) => (
+      <li>
+        <a href={`/${type}/${post.id}`}>{post.title}</a>
+      </li>
+    ))
+  }
+</ul>
