@@ -4,7 +4,7 @@ import { getContents } from "@lib/microcms";
 import Layout from "@layouts/Layout.astro";
 import ArticleDetailTemplate from "@components/templates/ArticleDetailTemplate.astro";
 
-// 詳細記事ページの全パスを取得
+// routing
 export async function getStaticPaths() {
   const response = await getContents("news");
   return response.map((content: any) => ({

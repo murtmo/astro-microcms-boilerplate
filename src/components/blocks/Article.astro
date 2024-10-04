@@ -13,11 +13,14 @@ const { type, article } = Astro.props;
 ---
 
 <article class="article">
-  <h1>{article.title}</h1>
+  <h2>{article.title}</h2>
   <p>
     公開日時：
     <FormattedDate date={article.publishedAt} />
   </p>
-  <CategoryList type={type} categories={article.categories} />
+  <div>
+    カテゴリ：
+    <CategoryList type={type} categories={article.categories} />
+  </div>
   <div set:html={article.content} />
 </article>
