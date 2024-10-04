@@ -43,12 +43,12 @@ Inside of your `components` directory, you'll see the following folders:
 
 ```text
 /components
-├── parts/
+├── atoms/
 ├── blocks/
 └── templates/
 ```
 
-#### parts/
+#### atoms/
 
 - Smallest, independent UI components
 - No logic, only styles
@@ -56,7 +56,7 @@ Inside of your `components` directory, you'll see the following folders:
 
 #### blocks/
 
-- Combine smaller components (`parts`)
+- Combine smaller components (`atoms`)
 - Define partial layouts
 - Handle component-specific logic
 
