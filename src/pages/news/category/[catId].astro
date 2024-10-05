@@ -1,0 +1,29 @@
+---
+import { getContentsByCategory, getCategories } from "@lib/microcms";
+
+import Layout from "@layouts/Layout.astro";
+import PostList from "@components/atoms/PostList.astro";
+
+// routing
+export async function getStaticPaths() {
+  const response = await getCategories();
+  return response.map((category: any) => ({
+    params: {
+      catId: category.id,
+    },
+    props: { catName: category.name },
+  }));
+}
+const { catId } = Astro.params;
+const { catName } = Astro.props;
+
+// data
+const postsDataFilterdByCategory = await getContentsByCategory("news", catId);
+---
+
+<Layout title="My first blog with Astro">
+  <h2>{catName}</h2>
+  <section>
+    <PostList type="news" posts={postsDataFilterdByCategory} />
+  </section>
+</Layout>

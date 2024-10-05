@@ -25,6 +25,13 @@ export type ContentResponse = {
   contents: Content[];
 };
 
+export type CategoryResponse = {
+  totalCount: number;
+  offset: number;
+  limit: ResponceLimit;
+  contents: CategoryData[];
+};
+
 export interface PostListData {
   id: string;
   title: string;
