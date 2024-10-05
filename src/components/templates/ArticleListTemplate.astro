@@ -2,6 +2,7 @@
 import type { ContentType } from "src/type.ts";
 import { getContents } from "@lib/microcms";
 import { groupByYearMonth } from "@util/groupBy";
+import { fetchUsedCategoriesForContentType } from "@util/fetchCustomData";
 
 import PostList from "@components/atoms/PostList.astro";
 
@@ -12,20 +13,28 @@ interface Props {
 const { type } = Astro.props;
 
 //data
-const title = type === "blog" ? "ブログ" : "ニュース";
-const postResponse = await getContents(type);
-const monthlyPostList = groupByYearMonth(postResponse);
+const postsData = await getContents(type);
+const categoriesList = await fetchUsedCategoriesForContentType(type);
+const monthlyPostList = groupByYearMonth(postsData);
+
+const title = type === "blog" ? "ブログ記事一覧" : "ニュース記事一覧";
 ---
 
 <div>
-  <h2>{title}記事一覧</h2>
+  <h2>{title}</h2>
   <section>
-    <PostList type={type} posts={postResponse} />
+    <PostList type={type} posts={postsData} />
   </section>
   <section>
-    <h3>カテゴリ別アーカイブ</h3>
+    <h3><a href={`/${type}/category/`}>カテゴリ別アーカイブ</a></h3>
     <ul>
-      <li>TBD</li>
+      {
+        categoriesList.map((category) => (
+          <li>
+            <a href={`/${type}/category/${category.id}`}>{category.name}</a>
+          </li>
+        ))
+      }
     </ul>
   </section>
   <section>

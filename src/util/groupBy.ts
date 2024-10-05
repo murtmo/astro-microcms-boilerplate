@@ -10,7 +10,7 @@ interface GroupedByYMContents {
   [yearMonth: string]: Content[];
 }
 
-// a. 年月にグルーピング
+// A. 年月にグルーピング
 export const groupByYearMonth = (contents: Content[]): GroupedByYMContents => {
   return contents.reduce<GroupedByYMContents>((group, post) => {
     // 各コンテンツ項目 post の publishedAt プロパティから日付を取得し、

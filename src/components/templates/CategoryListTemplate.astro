@@ -1,6 +1,6 @@
 ---
 import type { ContentType } from "src/type";
-import { getContents, getCategories } from "@lib/microcms";
+import { fetchUsedCategoriesForContentType } from "@util/fetchCustomData";
 
 interface Props {
   type: ContentType["type"];
@@ -8,20 +8,8 @@ interface Props {
 
 const { type } = Astro.props;
 
-const postsData = await getContents(type);
-const allCategories = await getCategories();
-
-// 全ての記事からカテゴリーを抽出し、重複を除去
-const uniqueCategories = [
-  ...new Set(
-    postsData.flatMap((post) => post.categories.map((category) => category.id)),
-  ),
-];
-
-// 記事に使用されているカテゴリーのみをフィルタリング
-const usedCategories = allCategories.filter((category) =>
-  uniqueCategories.includes(category.id),
-);
+// data
+const categoriesList = await fetchUsedCategoriesForContentType(type);
 
 const title = type === "blog" ? "ブログカテゴリ一覧" : "ニュースカテゴリ一覧";
 ---
@@ -30,7 +18,7 @@ const title = type === "blog" ? "ブログカテゴリ一覧" : "ニュースカ
   <h2>{title}</h2>
   <ul>
     {
-      usedCategories.map((category) => (
+      categoriesList.map((category) => (
         <li class={category.id}>
           <a href={`/${type}/category/${category.id}`}>{category.name}</a>
         </li>
